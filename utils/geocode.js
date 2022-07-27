@@ -3,26 +3,6 @@ import request from 'request';
 const MAPBOX_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const MAPBOX_ACCESS =
 	'pk.eyJ1IjoidmxhZGtvdmFhbCIsImEiOiJjbDV4NHE3c2swMGljM3JwMnd4eHFzaHByIn0.hb98iweCUBw3YS0jrFg3Hg';
-const WEATHER_URL = 'http://api.weatherstack.com/current';
-const WEATHER_ACCESS = '93751fe074068be9c2bc742f70adb5a9';
-
-const forecast = (lat, lon, cb) => {
-	const url =
-		WEATHER_URL + '?access_key=' + WEATHER_ACCESS + '&query=' + lat + ',' + lon;
-
-	request({ url, json: true }, (error, { body }) => {
-		if (error) {
-			cb('Unable to connect to weatherstack!', undefined);
-		} else if (body.error) {
-			cb(body.error.info, undefined);
-		} else {
-			cb(undefined, {
-				temperature: body.current.temperature,
-				feelslike: body.current.feelslike,
-			});
-		}
-	});
-};
 
 const geocode = (location, cb) => {
 	const locationUri = encodeURIComponent(location);
@@ -45,4 +25,4 @@ const geocode = (location, cb) => {
 	});
 };
 
-export { forecast, geocode };
+export { geocode };

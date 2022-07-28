@@ -10,10 +10,6 @@ body {
 	min-height: 100vh;
 }
 
-.main-content {
-	flex-grow: 1;
-}
-
 header {
 	margin-top: 16px;
 	margin-bottom: 48px;
@@ -21,8 +17,43 @@ header {
 
 header a {
 	color: #888888;
-	margin-right: 16px;
+	font-size: 24px;
 	text-decoration: none;
+	margin-right: 24px;
+}
+
+h1 {
+	font-size: 80px;
+	margin-bottom: 16px;
+}
+
+p {
+	font-size: 28px;
+	color: #333333;
+}
+
+form {
+	margin-top: 48px;
+}
+
+input {
+	width: 310px;
+	font-size: 24px;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	padding: 8px 12px;
+	margin-right: 16px;
+}
+
+button {
+	cursor: pointer;
+	width: 110px;
+	font-size: 24px;
+	background: #888888;
+	border: 1px solid #888888;
+	border-radius: 8px;
+	color: white;
+	padding: 8px 12px;
 }
 
 footer {
@@ -32,11 +63,23 @@ footer {
 	padding: 0 16px;
 }
 
-h1 {
-	font-size: 64px;
-	margin-bottom: 16px;
+.main-content {
+	flex-grow: 1;
 }
 
 .portrait {
-	width: 250px;
+	width: 350px;
+	box-shadow: 5px 5px 29px -10px rgba(0, 0, 0, 0.6);
+}
+
+#message-title {
+	font-size: 32px;
+}
+
+#author {
+	font-size: 18px;
+}
+
+#about-text {
+	margin-top: 48px;
 }

@@ -54,7 +54,7 @@ app.get('/weather', (req, res) => {
 			return res.send({ error });
 		}
 
-		forecast(latitude, longitude, (error, { desc, temp, precip } = {}) => {
+		forecast(latitude, longitude, (error, { desc, temp, precip, iconUrl } = {}) => {
 			if (error) {
 				return res.send({ error });
 			}
@@ -62,6 +62,7 @@ app.get('/weather', (req, res) => {
 			res.send({
 				location,
 				forecast: `It's ${temp}C outside. ${desc} There's ${precip}% chance of rain.`,
+				iconUrl,
 			});
 		});
 	});

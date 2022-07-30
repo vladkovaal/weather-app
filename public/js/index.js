@@ -14,7 +14,7 @@ locationForm.addEventListener('submit', (e) => {
 				messageTitle.innerHTML = data.error;
 			} else {
 				messageTitle.innerHTML = `<b>${data.location}</b>`;
-				messageText.innerHTML = data.forecast;
+				messageText.innerHTML = `<img src="${data.iconUrl}" id="icon">` + data.forecast;
 			}
 		});
 	});

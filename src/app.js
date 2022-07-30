@@ -2,6 +2,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import express from 'express';
 import hbs from 'hbs';
+import { geocode } from '../utils/geocode.js';
+import { forecast } from '../utils/forecast.js';
 
 const srcPath = path.dirname(fileURLToPath(import.meta.url));
 const rootPath = path.join(srcPath, '../');
@@ -10,6 +12,7 @@ const viewsPath = path.join(rootPath, '/templates/views');
 const partialsPath = path.join(rootPath, '/templates/partials');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
@@ -46,8 +49,21 @@ app.get('/weather', (req, res) => {
 		});
 	}
 
-	res.send({
-		location: req.query.location,
+	geocode(req.query.location, (error, { latitude, longitude, location } = {}) => {
+		if (error) {
+			return res.send({ error });
+		}
+
+		forecast(latitude, longitude, (error, { desc, temp, precip } = {}) => {
+			if (error) {
+				return res.send({ error });
+			}
+
+			res.send({
+				location,
+				forecast: `It's ${temp}C outside. ${desc} There's ${precip}% chance of rain.`,
+			});
+		});
 	});
 });
 
@@ -79,6 +95,6 @@ app.get('*', (req, res) => {
 	});
 });
 
-app.listen(3000, () => {
-	console.log('Server is up on port 3000.');
+app.listen(port, () => {
+	console.log(`Server is up on port ${port}.`);
 });

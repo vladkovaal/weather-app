@@ -6,15 +6,14 @@ const messageText = document.querySelector('#message-text');
 locationForm.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	const location = inputEl.value;
-	const requestUrl = 'http://localhost:3000/weather?location=' + location;
+	const requestUrl = '/weather?location=' + inputEl.value;
 
 	fetch(requestUrl).then((response) => {
 		response.json().then((data) => {
 			if (data.error) {
 				messageTitle.innerHTML = data.error;
 			} else {
-				messageTitle.innerHTML = data.location;
+				messageTitle.innerHTML = `<b>${data.location}</b>`;
 				messageText.innerHTML = data.forecast;
 			}
 		});
